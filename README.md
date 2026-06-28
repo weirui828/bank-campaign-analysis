@@ -12,14 +12,18 @@ The complete analysis, including exploratory data analysis, data preparation, mo
    The dataset is highly imbalanced, with roughly 89% of customers declining the term deposit. Therefore, standard "Accuracy" is not a reliable metric. We evaluated our models based on ROC-AUC, which gauges the model's ability to rank true subscribers higher than non-subscribers.
 
 2. **Model Comparisons**:
-   After testing Logistic Regression, K-Nearest Neighbors (KNN), Decision Trees, and Support Vector Machines (SVM), we found that the **Tuned Logistic Regression** and **Tuned SVM** models yielded the best performance (with a ROC-AUC score of approximately 0.79-0.80). Logistic Regression is particularly advantageous as it is both computationally efficient and highly interpretable.
+   After testing Logistic Regression, K-Nearest Neighbors (KNN), Decision Trees, and Support Vector Machines (SVM), we found that the **Tuned Logistic Regression** model yielded the best performance (with a ROC-AUC score of approximately 0.80), while SVM had the worst ROC performance. Logistic Regression is particularly advantageous as it is both computationally efficient and highly interpretable.
 
 3. **Key Drivers**:
-   * **Macroeconomic Indicators**: Variables such as the employment variation rate (`emp.var.rate`) and Euribor 3-month rate (`euribor3m`) strongly influence the outcome. Poor economic conditions or high employment variation correlate with clients avoiding term deposits.
+   * **Macroeconomic Indicators**: Variables such as the employment variation rate (`emp.var.rate`) and consumer price index (`cons.price.idx`) strongly influence the outcome. Poor economic conditions or high employment variation correlate with clients avoiding term deposits.
    * **Prior Engagement**: The `pdays` feature (days since the client was last contacted) is highly significant. Clients who had a recent and successful prior contact are substantially more likely to subscribe. 
    * **Timing**: The month of the contact heavily influenced the success rate. For example, contacts made in May saw a large volume of rejections.
 
-## Actionable Recommendations
+## Recommendations
 - **Target "Warm" Leads**: Clients who have been contacted in previous campaigns and had a successful interaction should be prioritized.
 - **Timing and Economic Context**: Marketing efforts should be scaled based on the broader economic environment. During times of low consumer confidence or high employment variation, aggressive campaigns may yield lower returns.
 - **Resource Optimization**: Using our Tuned Logistic Regression model, the bank can score potential clients. Call center agents should direct their focus strictly toward clients who score in the highest percentiles of predicted probability, drastically reducing time and money wasted on unlikely prospects.
+
+## Next Steps
+- **Advanced Modeling**: While Logistic Regression performed well, exploring advanced ensemble methods like Random Forest or Gradient Boosting (XGBoost) could potentially capture more complex, non-linear relationships in the data and improve the ROC-AUC score.
+- **Enhanced Data Collection**: To further improve prediction accuracy, the bank should consider collecting more granular data regarding the *reasons* for rejection in previous campaigns, rather than just recording a binary success/failure outcome.
